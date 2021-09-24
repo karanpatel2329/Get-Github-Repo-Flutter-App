@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "189236854084",
+    "project_id": "jakes-git",
+    "storage_bucket": "jakes-git.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189236854084:android:c5e55066748e8776b82b11",
+        "android_client_info": {
+          "package_name": "com.example.jakes_git"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189236854084-sk9plisl8328se4nbg8e1b2pl3nv1j3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXmwECNNu6xBXt6unucbjiwMrU7owGhe8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189236854084-sk9plisl8328se4nbg8e1b2pl3nv1j3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
