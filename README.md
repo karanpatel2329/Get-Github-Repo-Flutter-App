@@ -9,3 +9,4 @@ Flutter application contain features like.
 - Pagination which load 10 list at time
 - API integration
 
+![alt text](https://www.loom.com/share/d88cbd0484db44e4bf71d63d34a7d586)
