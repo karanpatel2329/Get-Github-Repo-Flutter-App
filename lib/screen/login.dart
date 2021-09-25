@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jakes_git/main.dart';
+import 'package:local_auth/local_auth.dart';
+
+import 'local_auth_api.dart';
 
 class SignIn extends StatefulWidget {
   late final String title;
@@ -20,7 +23,7 @@ class _SignInState extends State<SignIn> {
   late AuthCredential _phoneAuthCredential;
   late String _verificationId;
   late int _code;
-
+  late bool isAvailable=false;
   @override
   void initState() {
     Firebase.initializeApp();
@@ -36,6 +39,8 @@ class _SignInState extends State<SignIn> {
   }
 
   Future<void> _getFirebaseUser() async {
+    isAvailable = await LocalAuthApi.hasBiometrics();
+
     this._firebaseUser = (await FirebaseAuth.instance.currentUser)!;
     setState(() {
       _status =
@@ -62,18 +67,7 @@ class _SignInState extends State<SignIn> {
     }
   }
 
-  Future<void> _logout() async {
-    try {
-      // signout code
-      await FirebaseAuth.instance.signOut();
-      _firebaseUser = " null" as User;
-      setState(() {
-        _status += 'Signed out\n';
-      });
-    } catch (e) {
-      _handleError(e);
-    }
-  }
+
 
   Future<void> _submitPhoneNumber() async {
     String phoneNumber = "+91 " + _phoneNumberController.text.toString().trim();
@@ -207,8 +201,39 @@ class _SignInState extends State<SignIn> {
                   ),
               )
               : Container(),
+          buildAuthenticate(context),
         ],
       ),
     );
   }
+  Widget buildAuthenticate(BuildContext context) => buildButton(
+    text: 'Biometric Login',
+    icon: Icons.lock_open,
+    onClicked: () async {
+      final isAuthenticated = await LocalAuthApi.authenticate();
+
+      if (isAuthenticated) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      }
+    },
+  );
+  Widget buildButton({
+    required String text,
+    required IconData icon,
+    required VoidCallback onClicked,
+  }) =>
+      ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size.fromHeight(50),
+        ),
+        icon: Icon(icon, size: 26),
+        label: Text(
+          text,
+          style: TextStyle(fontSize: 20),
+        ),
+        onPressed: onClicked,
+      );
+
 }

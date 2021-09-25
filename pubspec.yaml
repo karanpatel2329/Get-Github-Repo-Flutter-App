@@ -32,7 +32,7 @@ dependencies:
   pull_to_refresh:
   font_awesome_flutter:
   firebase_core:
-
+  local_auth:
   firebase_auth:
 dev_dependencies:
   flutter_test:
